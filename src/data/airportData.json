@@ -1,0 +1,98 @@
+{
+  "entities": [
+    {
+      "id": "camera-1",
+      "title": "Security Camera",
+      "position": { "x": 100, "y": 100 },
+      "fields": [
+        { "name": "id", "type": "UUID" },
+        { "name": "location", "type": "String" },
+        { "name": "status", "type": "Enum" },
+        { "name": "resolution", "type": "String" },
+        { "name": "last_maintenance", "type": "Date" }
+      ],
+      "description": "Security cameras installed throughout the airport for surveillance."
+    },
+    {
+      "id": "gate-1",
+      "title": "Boarding Gate",
+      "position": { "x": 400, "y": 100 },
+      "fields": [
+        { "name": "id", "type": "UUID" },
+        { "name": "gate_number", "type": "String" },
+        { "name": "terminal", "type": "String" },
+        { "name": "status", "type": "Enum" },
+        { "name": "capacity", "type": "Number" }
+      ],
+      "description": "Boarding gates where passengers enter the aircraft."
+    },
+    {
+      "id": "special-entity",
+      "title": "Security Checkpoint",
+      "position": { "x": 250, "y": 250 },
+      "fields": [
+        { "name": "id", "type": "UUID" },
+        { "name": "checkpoint_number", "type": "String" },
+        { "name": "terminal", "type": "String" },
+        { "name": "status", "type": "Enum" },
+        { "name": "wait_time", "type": "Number" },
+        { "name": "staff_count", "type": "Number" }
+      ],
+      "description": "Security checkpoints for passenger screening."
+    },
+    {
+      "id": "baggage-1",
+      "title": "Baggage System",
+      "position": { "x": 100, "y": 400 },
+      "fields": [
+        { "name": "id", "type": "UUID" },
+        { "name": "system_id", "type": "String" },
+        { "name": "status", "type": "Enum" },
+        { "name": "capacity", "type": "Number" },
+        { "name": "processing_rate", "type": "Number" }
+      ],
+      "description": "Baggage handling systems for processing passenger luggage."
+    },
+    {
+      "id": "access-1",
+      "title": "Access Control",
+      "position": { "x": 400, "y": 400 },
+      "fields": [
+        { "name": "id", "type": "UUID" },
+        { "name": "door_id", "type": "String" },
+        { "name": "area", "type": "String" },
+        { "name": "clearance_level", "type": "Number" },
+        { "name": "status", "type": "Enum" },
+        { "name": "last_access", "type": "DateTime" }
+      ],
+      "description": "Access control systems for restricted areas."
+    }
+  ],
+  "relations": [
+    {
+      "source": "camera-1",
+      "target": "special-entity",
+      "label": "monitors"
+    },
+    {
+      "source": "special-entity",
+      "target": "gate-1",
+      "label": "secures"
+    },
+    {
+      "source": "baggage-1",
+      "target": "special-entity",
+      "label": "scanned by"
+    },
+    {
+      "source": "access-1",
+      "target": "special-entity",
+      "label": "restricts"
+    },
+    {
+      "source": "access-1",
+      "target": "gate-1",
+      "label": "controls"
+    }
+  ]
+}
