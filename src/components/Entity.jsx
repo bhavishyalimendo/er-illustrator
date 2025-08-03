@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { getEntityDetailPath } from '../routes';
 
 const Entity = ({ id, title, fields = [], onEntityClick }) => {
-  console.log('Entity component rendering with props:', { id, title, fields });
+  // console.log('Entity component rendering with props:', { id, title, fields });
   const navigate = useNavigate();
 
   const handleClick = (e) => {
@@ -22,7 +22,7 @@ const Entity = ({ id, title, fields = [], onEntityClick }) => {
 
   return (
     <div 
-      className="bg-white rounded-md shadow-md p-4 w-64 cursor-pointer hover:shadow-lg transition-shadow"
+      className="bg-white rounded-md shadow-md p-4 w-60 cursor-pointer hover:shadow-lg transition-shadow"
       onClick={handleClick}
     >
       <div className="font-bold text-lg border-b pb-2 mb-2">{title}</div>

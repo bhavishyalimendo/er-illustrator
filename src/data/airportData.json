@@ -3,7 +3,7 @@
     {
       "id": "camera-1",
       "title": "Security Camera",
-      "position": { "x": 100, "y": 100 },
+      "position": { "x": 150, "y": 100 },
       "fields": [
         { "name": "id", "type": "UUID" },
         { "name": "location", "type": "String" },
@@ -16,7 +16,7 @@
     {
       "id": "gate-1",
       "title": "Boarding Gate",
-      "position": { "x": 400, "y": 100 },
+      "position": { "x": 1000, "y": 200 },
       "fields": [
         { "name": "id", "type": "UUID" },
         { "name": "gate_number", "type": "String" },
@@ -29,7 +29,7 @@
     {
       "id": "special-entity",
       "title": "Security Checkpoint",
-      "position": { "x": 250, "y": 250 },
+      "position": { "x": 600, "y": 50 },
       "fields": [
         { "name": "id", "type": "UUID" },
         { "name": "checkpoint_number", "type": "String" },
@@ -43,7 +43,7 @@
     {
       "id": "baggage-1",
       "title": "Baggage System",
-      "position": { "x": 100, "y": 400 },
+      "position": { "x": 200, "y": 450 },
       "fields": [
         { "name": "id", "type": "UUID" },
         { "name": "system_id", "type": "String" },
@@ -56,7 +56,7 @@
     {
       "id": "access-1",
       "title": "Access Control",
-      "position": { "x": 400, "y": 400 },
+      "position": { "x": 650, "y": 400 },
       "fields": [
         { "name": "id", "type": "UUID" },
         { "name": "door_id", "type": "String" },
@@ -87,12 +87,12 @@
     {
       "source": "access-1",
       "target": "special-entity",
-      "label": "restricts"
+      "label": ""
     },
     {
       "source": "access-1",
       "target": "gate-1",
-      "label": "controls"
+      "label": ""
     }
   ]
 }

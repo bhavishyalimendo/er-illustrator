@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
-import EntityDetail from "../pages/EntityDetail";
+import EntityDetail from "../pages/EntityDetails";
 
 // Route path constants
 export const ROUTES = {

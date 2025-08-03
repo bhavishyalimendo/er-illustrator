@@ -10,18 +10,17 @@ import ReactFlow, {
 } from "reactflow";
 import "reactflow/dist/style.css";
 import EntityNode from "./EntityNode";
+import { getEntityDetailPath } from "../routes";
+import { useNavigate } from "react-router-dom";
 
 // Register custom node types
 const nodeTypes = {
   entityNode: EntityNode,
 };
 
-// For debugging
-console.log("Registered nodeTypes:", nodeTypes);
-console.log("EntityNode component:", EntityNode);
-
 const EntityDiagram = ({ initialEntities = [], initialRelations = [] }) => {
   const [selectedEntity, setSelectedEntity] = useState(null);
+  const navigate = useNavigate();
 
   // Reference to the flow instance
   const reactFlowInstance = useRef(null);
@@ -55,7 +54,7 @@ const EntityDiagram = ({ initialEntities = [], initialRelations = [] }) => {
 
   // Convert entities to nodes
   const initialNodes = initialEntities.map((entity) => {
-    console.log("Processing entity:", entity);
+    // console.log("Processing entity:", entity);
     return {
       id: entity.id,
       type: "entityNode",
@@ -109,8 +108,13 @@ const EntityDiagram = ({ initialEntities = [], initialRelations = [] }) => {
           defaultViewport={{ x: 0, y: 0, zoom: 1 }}
           minZoom={0.1}
           maxZoom={2.5}
+          onNodeDrag={(event, node) => {
+            console.log("Dragging:", node.id, node.position);
+          }}
+          onNodeDragStop={(event, node) => {
+            console.log("Drag stopped:", node.id, node.position);
+          }}
           onInit={(setInstance) => {
-            console.log("ReactFlow initialized with instance:", setInstance);
             reactFlowInstance.current = setInstance;
             // Force a re-render of the nodes
             setTimeout(() => {
@@ -132,7 +136,7 @@ const EntityDiagram = ({ initialEntities = [], initialRelations = [] }) => {
                 onClick={onZoomToFit}
                 className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm"
               >
-                Zoom to Fit
+                Fit to Screen
               </button>
               <button
                 onClick={onCenter}
@@ -157,7 +161,7 @@ const EntityDiagram = ({ initialEntities = [], initialRelations = [] }) => {
         </ReactFlow>
 
         {/* Modal for special entity */}
-        {selectedEntity && selectedEntity.id === "special-entity" && (
+        {selectedEntity && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white p-6 rounded-lg shadow-xl max-w-md w-full">
               <div className="flex justify-between items-center mb-4">
@@ -181,6 +185,14 @@ const EntityDiagram = ({ initialEntities = [], initialRelations = [] }) => {
                 ))}
               </div>
               <div className="mt-6 flex justify-end">
+                <button
+                  onClick={() =>
+                    navigate(getEntityDetailPath(selectedEntity.id))
+                  }
+                  className="px-4 py-2 mr-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                >
+                  More Details
+                </button>
                 <button
                   onClick={closeModal}
                   className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
