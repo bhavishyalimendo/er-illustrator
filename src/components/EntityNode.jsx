@@ -3,7 +3,7 @@ import { Handle, Position } from "reactflow";
 import Entity from "./Entity";
 
 // For debugging
-console.log("EntityNode component loaded");
+// console.log("EntityNode component loaded");
 
 const EntityNode = ({ data, isConnectable }) => {
   // console.log('EntityNode rendering with data:', data);

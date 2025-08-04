@@ -27,7 +27,7 @@
       "description": "Boarding gates where passengers enter the aircraft."
     },
     {
-      "id": "special-entity",
+      "id": "security-checkpoint",
       "title": "Security Checkpoint",
       "position": { "x": 600, "y": 50 },
       "fields": [
@@ -56,8 +56,14 @@
     {
       "id": "access-1",
       "title": "Access Control",
-      "position": { "x": 650, "y": 400 },
+      "position": { "x": 600, "y": 450 },
       "fields": [
+        { "name": "id", "type": "UUID" },
+        { "name": "door_id", "type": "String" },
+        { "name": "area", "type": "String" },
+        { "name": "clearance_level", "type": "Number" },
+        { "name": "status", "type": "Enum" },
+        { "name": "last_access", "type": "DateTime" },
         { "name": "id", "type": "UUID" },
         { "name": "door_id", "type": "String" },
         { "name": "area", "type": "String" },
@@ -71,28 +77,38 @@
   "relations": [
     {
       "source": "camera-1",
-      "target": "special-entity",
-      "label": "monitors"
+      "target": "security-checkpoint",
+      "label": "monitors",
+      "stroke": "",
+      "type": "step"
     },
     {
-      "source": "special-entity",
+      "source": "security-checkpoint",
       "target": "gate-1",
-      "label": "secures"
+      "label": "secures",
+      "stroke": "green",
+      "type": ""
     },
     {
       "source": "baggage-1",
-      "target": "special-entity",
-      "label": "scanned by"
+      "target": "security-checkpoint",
+      "label": "scanned by",
+      "stroke": "",
+      "type": "step"
     },
     {
       "source": "access-1",
-      "target": "special-entity",
-      "label": ""
+      "target": "security-checkpoint",
+      "label": "",
+      "stroke": "",
+      "type": "step"
     },
     {
       "source": "access-1",
       "target": "gate-1",
-      "label": ""
+      "label": "",
+      "stroke": "green",
+      "type": ""
     }
   ]
 }

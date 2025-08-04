@@ -75,8 +75,9 @@ const EntityDiagram = ({ initialEntities = [], initialRelations = [] }) => {
     source: relation.source,
     target: relation.target,
     label: relation.label,
-    type: "default",
+    type: relation.type || "default",
     animated: true,
+    style: { stroke: relation.stroke || "blue", strokeWidth: 2 },
   }));
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
